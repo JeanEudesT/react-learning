@@ -4,6 +4,7 @@ import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
 
 
+// @ts-expect-error je ne sais pas encore comment régler ce problème
 export default async function Page(props) {
   const params = await props.params;
   const id = params.id
