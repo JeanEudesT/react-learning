@@ -6,13 +6,11 @@ import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import { db } from '@vercel/postgres';
 
-const sql = await db.connect();
 async function getUser(email: string): Promise<User | undefined> {
   try {
-    const user = await db.sql<User[]>`SELECT * FROM users WHERE email=${email}`;
-    const r = user.rows[0][0]
-    console.log("COUCOU GUYS")
-    return r
+    const user = await db.sql`SELECT * FROM users WHERE email=${email}`;
+    const r = user.rows[0]
+    return user.rows[0] as User
   } catch (error) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
